@@ -58,9 +58,9 @@ export function initBaiduMap(domId, centerLL = defaultCenter) {
     tileGrid: baiduTileGrid,
     tileUrlFunction: function (tileCoord) {
       if (!tileCoord) return '';
-      const z = tileCoord[0];
-      const x = tileCoord[1];
-      const y = tileCoord[2];
+      const z = tileCoord[0] || 0;
+      const x = tileCoord[1] || 0;
+      const y = tileCoord[2] || 0;
 
       let xc = x < 0 ? 'M' + -x : x;
       let yc = -y - 1 < 0 ? 'M' + -(-y - 1) : -y - 1;
@@ -98,7 +98,7 @@ export function initBaiduMap(domId, centerLL = defaultCenter) {
  * @param {Array} billboardList - 广告牌数据列表
  * @param {HTMLElement} popupContainerEl - 弹窗 DOM 元素
  */
-export function addBillboardsWithHover(map, billboardList, popupContainerEl) {
+export function addBillboardsWithHover(map: any, billboardList: any, popupContainerEl: any) {
   // 1. 创建 Overlay 弹窗实例
   const popupOverlay = new Overlay({
     element: popupContainerEl,
@@ -138,7 +138,7 @@ export function addBillboardsWithHover(map, billboardList, popupContainerEl) {
   map.addLayer(vectorLayer);
 
   // 4. 监听鼠标移动事件 (Hover 悬停)
-  map.on('pointermove', evt => {
+  map.on('pointermove', (evt: any) => {
     // 拖拽地图时不触发
     if (evt.dragging) {
       popupOverlay.setPosition(undefined);
@@ -146,7 +146,7 @@ export function addBillboardsWithHover(map, billboardList, popupContainerEl) {
     }
 
     // 拾取鼠标所在位置的矢量要素
-    const feature = map.forEachFeatureAtPixel(evt.pixel, f => f);
+    const feature = map.forEachFeatureAtPixel(evt.pixel, (f: any) => f);
 
     if (feature) {
       const data = feature.get('data');
