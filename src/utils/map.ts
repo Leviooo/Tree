@@ -31,7 +31,7 @@ const defaultCenter = [111.4610712, 27.2426563]
 /**
  * 初始化 OpenLayers 百度地图
  */
-export function initBaiduMap(domId, centerLL = defaultCenter) {
+export function initBaiduMap(domId: any, centerLL = defaultCenter) {
   registerBaiduProjections();
 
   const baiduProj = new Projection({
